@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const cors = require("cors"); // Import cors
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Enable CORS for all routes
 app.use(cors());
@@ -32,7 +33,13 @@ app.get('/api', (req, res) => {
     res.send('API is working!');
 });
 
-
-app.listen(3001, () => {
-    console.log("Server is running on port 3001");
+app.use((req, res) => {
+    res.status(404).send('Route not found');
 });
+
+
+
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+
